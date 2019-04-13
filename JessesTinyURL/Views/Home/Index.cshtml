@@ -1,0 +1,81 @@
+﻿@model TinyURLViewModel
+@{
+    ViewData["Title"] = "URLs";
+}
+
+<!-- Row 1 -->
+<!-- Header -->
+<div class="row">
+    <h2>@ViewData["Title"]</h2>
+</div>
+
+<!-- Row 2 -->
+<!-- Tiny URL Input -->
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="container-fluid">
+                <form asp-controller="Home" asp-action="PostTinyUrl">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="form-group">
+                                <input asp-for="input.URL" class="form-control" />
+                                <span asp-validation-for="input.URL" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger">Create URL</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Row 3 -->
+<!-- Tiny URL list -->
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.input.URL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.input.TinyURL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.input.Hits)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.MyURLs)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.URL)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TinyURL)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Hits)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
